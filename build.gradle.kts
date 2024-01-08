@@ -8,6 +8,7 @@ plugins {
     application
 }
 
+
 group = "com.github.LukynkaCZE"
 version = "1.0"
 
@@ -29,6 +30,9 @@ tasks {
     }
 }
 
+dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+}
 
 publishing {
     publications {
