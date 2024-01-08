@@ -9,7 +9,8 @@ Logging is very easy, just call the `log(message, type)` method. `type` paramete
 log("Hello there!")
 log("general kenobi", LogType.NETWORK)
 ```
-![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/7aad7a44-ced4-4049-9932-9c5a81f80b22)
+![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/4052e4f2-6b69-4e95-a2ee-ba130615d82f)
+
 
 You can also log exceptions!
 ```kotlin
@@ -17,7 +18,7 @@ You can also log exceptions!
     log(exception)
 }
 ```
-![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/da48c24b-7846-47b1-82ce-df50d331b07d)
+![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/a5268ff2-7736-43df-bfb0-2a82bfc6ecc3)
 
 ## Logger Settings
 You can change settings by simply setting `LoggerSettings.<setting>` to its new value
@@ -35,28 +36,28 @@ LoggerSettings.loggerStyle = LoggerStyle.PREFIX
 
 ### Logger Styles
 There are 4 logger styles: **FULL**, **PREFIX**, **SUFFIX** and **TEXT_ONLY**
-![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/c264859f-c082-45d0-9f81-5743c744ebdd)
+
+![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/d6ac077f-506c-4b4e-b65f-bc1d7ce2ce40)
 
 ## Log Types
 There are 7 default log types: **Information**, **Runtime**, **Network**, **Success**, **Warning**, **Error** and **Exception**
 
-![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/9fea58ff-5441-4b5b-974f-810f91237dfc)
+![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/f6499729-a12c-4474-8969-907396f7971c)
 
 ### Custom Log Types
 You can make custom log types by making object and then making vals in it with `CustomLogType(name, AnsiPair)` data class
 
 ```kotlin
 object CustomLogTypes {
-    val CUSTOM = CustomLogType("Very Custom Log Type", AnsiPair.YELLOW)
-    val GIT = CustomLogType("Git", AnsiPair.WHITE)
+    val CUTE = CustomLogType("≽^•⩊•^≼", AnsiPair.CUTE_PINK)
+    val GIT = CustomLogType("\uD83E\uDD16 Git", AnsiPair.AQUA)
+    val FIRE_WARNING = CustomLogType("\uD83D\uDD25 Fire Warning", AnsiPair.ORANGE)
 }
 ```
 ```kotlin
-log("Very Custom Log Type!!!!", CustomLogTypes.CUSTOM)
+log("T-This is vewy cuwute message OwO", CustomLogTypes.CUTE)
 log("refusing to merge unrelated histories", CustomLogTypes.GIT)
+log("SERVER ROOM ON FIRE, DONT LET ASO RUN WHILE LOOPS EVER AGAIN", CustomLogTypes.FIRE_WARNING)
 ```
 
-![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/6ae1251f-1e30-41f4-9eea-9b06b6bb82f8)
-
-
-## 
+![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/93f82bab-1ccc-470b-8827-cfe4a1409a55)
