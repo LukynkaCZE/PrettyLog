@@ -1,6 +1,3 @@
-import java.text.SimpleDateFormat
-import java.util.*
-
 object LoggerSettings {
     var saveToFile = true
     var saveDirectoryPath = "./logs/"
