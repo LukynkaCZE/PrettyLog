@@ -2,22 +2,16 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.9.22"
+    `maven-publish`
     application
 }
 
-group = "cz.lukynka"
-version = "1.0-SNAPSHOT"
+group = "com.github.LukynkaCZE"
+version = "1.0"
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
+    maven("https://jitpack.io")
 }
 
 tasks.withType<KotlinCompile> {
@@ -26,4 +20,16 @@ tasks.withType<KotlinCompile> {
 
 application {
     mainClass.set("MainKt")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.github.LukynkaCZE"
+            artifactId = "PrettyLog"
+            version = "1.0.0"
+
+            from(components["java"])
+        }
+    }
 }
