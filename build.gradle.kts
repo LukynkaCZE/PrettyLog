@@ -1,6 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.tooling.core.withClosure
 
 plugins {
+    java
     kotlin("jvm") version "1.9.22"
     `maven-publish`
     application
@@ -14,21 +16,23 @@ repositories {
     maven("https://jitpack.io")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}
-
 application {
     mainClass.set("MainKt")
 }
 
+tasks {
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+}
+
+
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "com.github.LukynkaCZE"
-            artifactId = "PrettyLog"
-            version = "1.0.0"
-
             from(components["java"])
         }
     }
