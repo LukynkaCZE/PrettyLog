@@ -14,7 +14,6 @@ version = "1.0"
 
 repositories {
     mavenCentral()
-    maven("https://jitpack.io")
 }
 
 application {
@@ -37,6 +36,10 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("maven") {
+            groupId = "com.github.LukynklaCZE"
+            artifactId = "PrettyLog"
+            version = "1.0.0"
+
             from(components["java"])
         }
     }
