@@ -8,6 +8,7 @@ import java.util.*
 object LoggerFileWriter {
     var isLoaded = false
     lateinit var file: File
+    private val logFileName: String = SimpleDateFormat(LoggerSettings.logFileNameFormat).format(Calendar.getInstance().time)
 
     // Store the logs that come before the FileWriter is loaded
     var unloadedLogQueue = mutableListOf<Pair<String, CustomLogType>>()
@@ -20,7 +21,7 @@ object LoggerFileWriter {
 
         //Make sure the path has the correct format
         if(!LoggerSettings.saveDirectoryPath.endsWith("/")) LoggerSettings.saveDirectoryPath += "/"
-        file = File("${LoggerSettings.saveDirectoryPath}${LoggerSettings.logFileName}.log")
+        file = File("${LoggerSettings.saveDirectoryPath}${logFileName}.log")
 
         // Create the directory if it doesn't exist
         if(!directoryExists(LoggerSettings.saveDirectoryPath)) {

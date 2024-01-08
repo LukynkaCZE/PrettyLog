@@ -5,7 +5,7 @@ object LoggerSettings {
     var saveToFile = true
     var saveDirectoryPath = "./logs/"
     var loggerStyle = LoggerStyle.PREFIX
-    val logFileName: String = SimpleDateFormat("yyyy-MM-dd-Hms").format(Calendar.getInstance().time)
+    var logFileNameFormat = "yyyy-MM-dd-Hms"
 }
 
 enum class LoggerStyle(val pattern: String) {
@@ -29,7 +29,7 @@ fun log(message: String, type: CustomLogType = LogType.RUNTIME) {
 }
 
 fun log(exception: Exception) {
-    log("$exception ${exception.cause.toString()}", LogType.EXCEPTION)
+    log("$exception", LogType.EXCEPTION)
     exception.stackTrace.forEach {
         log("   $it", LogType.EXCEPTION)
     }
