@@ -10,7 +10,7 @@ plugins {
 
 
 group = "com.github.LukynkaCZE"
-version = "master-SNAPSHOT"
+version = "1.1"
 
 repositories {
     mavenCentral()
