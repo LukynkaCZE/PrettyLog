@@ -40,9 +40,9 @@ There are 4 logger styles: **FULL**, **PREFIX**, **SUFFIX** and **TEXT_ONLY**
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/d6ac077f-506c-4b4e-b65f-bc1d7ce2ce40)
 
 ## Log Types
-There are 7 default log types: **Information**, **Runtime**, **Network**, **Success**, **Warning**, **Error** and **Exception**
+There are 8 default log types: **Debug**, **Information**, **Runtime**, **Network**, **Success**, **Warning**, **Error** and **Exception**
 
-![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/f6499729-a12c-4474-8969-907396f7971c)
+![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/4b4385e7-7c55-4677-a791-bf88e6608140)
 
 ### Custom Log Types
 You can make custom log types by making object and then making vals in it with `CustomLogType(name, AnsiPair)` data class
