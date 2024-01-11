@@ -1,6 +1,7 @@
 object LogType {
     val INFORMATION = CustomLogType("ℹ\uFE0F Information", AnsiPair.CYAN)
     val RUNTIME = CustomLogType("✨ Runtime", AnsiPair.PINK)
+    val DEBUG = CustomLogType("\uD83D\uDD27 Debug", AnsiPair.GRAY)
     val NETWORK = CustomLogType("\uD83D\uDD0C Network", AnsiPair.BLUE)
     val SUCCESS = CustomLogType("✔\uFE0F Success", AnsiPair.GREEN)
     val WARNING = CustomLogType("⚠\uFE0F Warning", AnsiPair.YELLOW)

@@ -2,6 +2,9 @@ enum class AnsiColor(val code: String) {
     RESET("\u001B[0m"),
     BLACK(foreColor(232)),
 
+    GRAY(foreColor(244)),
+    GRAY_BACKGROUND(backColor(244)),
+
     GREEN(foreColor(40)),
     GREEN_BACKGROUND(backColor(40)),
 
@@ -48,6 +51,7 @@ enum class AnsiPair(val background: AnsiColor, val foreground: AnsiColor) {
     PURPLE(AnsiColor.PURPLE_BACKGROUND, AnsiColor.PURPLE),
     CYAN(AnsiColor.CYAN_BACKGROUND, AnsiColor.CYAN),
     WHITE(AnsiColor.WHITE_BACKGROUND, AnsiColor.WHITE),
+    GRAY(AnsiColor.GRAY_BACKGROUND, AnsiColor.GRAY),
     AQUA(AnsiColor.AQUA_BACKGROUND, AnsiColor.AQUA),
     PINK(AnsiColor.PINK_BACKGROUND, AnsiColor.PINK),
     CUTE_PINK(AnsiColor.CUTE_PINK_BACKGROUND, AnsiColor.CUTE_PINK),

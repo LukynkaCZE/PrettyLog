@@ -10,10 +10,11 @@ plugins {
 
 
 group = "com.github.LukynkaCZE"
-version = "1.0"
+version = "master-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 application {
@@ -34,12 +35,18 @@ dependencies {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
     publications {
-        create<MavenPublication>("maven") {
-            groupId = "com.github.LukynklaCZE"
-            artifactId = "PrettyLog"
-            version = "1.0.0"
-
+        register<MavenPublication>("gpr") {
             from(components["java"])
         }
     }
