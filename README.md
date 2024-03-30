@@ -5,6 +5,8 @@ PrettyLog takes advantage of ANSI color codes to make your logs look ✨ ***pret
 
 ## Installation
 
+
+<img src="https://cdn.worldvectorlogo.com/logos/kotlin-2.svg" width="16px"></img>
 **Kotlin DSL**
 ```kotlin
 repositories {
@@ -21,7 +23,7 @@ dependencies {
     implementation("cz.lukynka:pretty-log:1.2")
 }
 ```
-
+<img src="https://github.com/LukynkaCZE/PrettyLog/assets/48604271/3293feca-7395-4100-8b61-257ba40dbe3c" width="18px"></img>
 **Gradle**
 ```groovy
 repositories {
