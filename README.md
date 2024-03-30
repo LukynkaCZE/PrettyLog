@@ -3,6 +3,46 @@
 A Kotlin logging library focused on readability in console.
 PrettyLog takes advantage of ANSI color codes to make your logs look ✨ ***pretty*** ✨.
 
+## Installation
+
+**Kotlin DSL**
+```kotlin
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/LukynkaCZE/PrettyLog")
+        credentials {
+            project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
+            project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
+}
+
+dependencies {
+    implementation("cz.lukynka:pretty-log:1.2")
+}
+```
+
+**Gradle**
+```groovy
+repositories {
+    mavenCentral()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/LukynkaCZE/PrettyLog")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USER")
+            password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
+}
+
+dependencies {
+    implementation 'cz.lukynka:pretty-log:1.2'
+}
+```
+
+**Note:** You will need to set `gpr.user` to your github username and `gpr.token` to your github access token in `gradle.properties` [(Authenticating to Github Packages)](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#authenticating-to-github-packages). Alternativly you can also set `GITHUB_USER` and `GITHUB_TOKEN` in your environment variable
+
 ## Logging
 Logging is very easy, just call the `log(message, type)` method. `type` parameter is optional and defaults to `RUNTIME`
 ```kotlin
@@ -35,9 +75,9 @@ LoggerSettings.loggerStyle = LoggerStyle.PREFIX
 ```
 
 ### Logger Styles
-There are 4 logger styles: **FULL**, **PREFIX**, **SUFFIX** and **TEXT_ONLY**
+There are 7 logger styles in total:
 
-![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/d6ac077f-506c-4b4e-b65f-bc1d7ce2ce40)
+![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/17c8ab17-3003-4c5a-a4dd-91c0b08203f8)
 
 ## Log Types
 There are 8 default log types: **Debug**, **Information**, **Runtime**, **Network**, **Success**, **Warning**, **Error** and **Exception**
