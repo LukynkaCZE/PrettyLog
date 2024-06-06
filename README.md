@@ -1,7 +1,7 @@
 # PrettyLog
 
 A Kotlin logging library focused on readability in console.
-PrettyLog takes advantage of ANSI color codes to make your logs look  ***pretty*** .
+PrettyLog takes advantage of ANSI color codes to make your logs look ✨ ***pretty*** ✨.
 
 ## Installation
 
