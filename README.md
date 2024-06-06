@@ -1,7 +1,7 @@
 # PrettyLog
 
 A Kotlin logging library focused on readability in console.
-PrettyLog takes advantage of ANSI color codes to make your logs look ✨ ***pretty*** ✨.
+PrettyLog takes advantage of ANSI color codes to make your logs look  ***pretty*** .
 
 ## Installation
 
@@ -13,8 +13,8 @@ repositories {
     maven {
         url = uri("https://maven.pkg.github.com/LukynkaCZE/PrettyLog")
         credentials {
-            project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
-            project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
+            password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
         }
     }
 }
