@@ -5,46 +5,35 @@ PrettyLog takes advantage of ANSI color codes to make your logs look ✨ ***pret
 
 ## Installation
 
-
 <img src="https://cdn.worldvectorlogo.com/logos/kotlin-2.svg" width="16px"></img>
 **Kotlin DSL**
 ```kotlin
 repositories {
     maven {
-        url = uri("https://maven.pkg.github.com/LukynkaCZE/PrettyLog")
-        credentials {
-            project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
-            project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
-        }
+        name = "devOS"
+        url = uri("https://mvn.devos.one/releases")
     }
 }
 
 dependencies {
-    implementation("cz.lukynka:pretty-log:1.2")
+    implementation("cz.lukynka:pretty-log:1.3")
 }
 ```
 <img src="https://github.com/LukynkaCZE/PrettyLog/assets/48604271/3293feca-7395-4100-8b61-257ba40dbe3c" width="18px"></img>
-**Gradle**
+**Gradle Groovy**
 ```groovy
 repositories {
     mavenCentral()
     maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/LukynkaCZE/PrettyLog")
-        credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USER")
-            password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
-        }
+        name "devOS"
+        url "https://mvn.devos.one/releases"
     }
 }
 
 dependencies {
-    implementation 'cz.lukynka:pretty-log:1.2'
+    implementation 'cz.lukynka:pretty-log:1.3'
 }
 ```
-
-**Note:** You will need to set `gpr.user` to your github username and `gpr.token` to your github access token in `gradle.properties` [(Authenticating to Github Packages)](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages#authenticating-to-github-packages). Alternativly you can also set `GITHUB_USER` and `GITHUB_TOKEN` in your environment variable
-
 ## Logging
 Logging is very easy, just call the `log(message, type)` method. `type` parameter is optional and defaults to `RUNTIME`
 ```kotlin
@@ -82,9 +71,9 @@ There are 7 logger styles in total:
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/17c8ab17-3003-4c5a-a4dd-91c0b08203f8)
 
 ## Log Types
-There are 8 default log types: **Debug**, **Information**, **Runtime**, **Network**, **Success**, **Warning**, **Error** and **Exception**
+There are 16 default log types: **Debug**, **Information**, **Runtime**, **Network**, **Success**, **Warning**, **Error**, **Exception**, **Critical**, **Audit**, **Trace**, **Security**, **User Action**, **Performance**, **Config**, and **Fatal**.
 
-![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/4b4385e7-7c55-4677-a791-bf88e6608140)
+![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/ee41b3a2-b2af-4ba8-a5d5-cfb7410b1065)
 
 ### Custom Log Types
 You can make custom log types by making object and then making vals in it with `CustomLogType(name, AnsiPair)` data class

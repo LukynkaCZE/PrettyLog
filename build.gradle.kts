@@ -1,20 +1,20 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.tooling.core.withClosure
-
 plugins {
-    java
-    kotlin("jvm") version "1.9.22"
     `maven-publish`
+    kotlin("jvm") version "1.9.22"
     application
 }
 
+group = "cz.lukynka"
+version = "1.3"
 
-group = "com.github.LukynkaCZE"
-version = "1.1"
+val githubUser: String = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
+val githubPassword: String = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
-    maven("https://jitpack.io")
+
 }
 
 application {
@@ -23,10 +23,10 @@ application {
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "17"
     }
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "17"
     }
 }
 
@@ -37,16 +37,19 @@ dependencies {
 publishing {
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+            url = uri("https://mvn.devos.one/releases")
             credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+                username = System.getenv()["MAVEN_USER"]
+                password = System.getenv()["MAVEN_PASS"]
             }
         }
     }
+
     publications {
-        register<MavenPublication>("gpr") {
+        register<MavenPublication>("maven") {
+            groupId = "cz.lukynka"
+            artifactId = "pretty-log"
+            version = version
             from(components["java"])
         }
     }
