@@ -1,3 +1,5 @@
+package cz.lukynka.prettylog
+
 enum class AnsiColor(val code: String) {
     RESET("\u001B[0m"),
     BOLD("\u001B[1m"),

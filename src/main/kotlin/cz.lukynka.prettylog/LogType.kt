@@ -1,3 +1,5 @@
+package cz.lukynka.prettylog
+
 object LogType {
     val INFORMATION = CustomLogType("ℹ\uFE0F Information", AnsiPair.CYAN)
     val RUNTIME = CustomLogType("✨ Runtime", AnsiPair.MAGENTA)
