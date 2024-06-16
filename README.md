@@ -1,3 +1,5 @@
+[![wakatime](https://wakatime.com/badge/github/LukynkaCZE/PrettyLog.svg)](https://wakatime.com/badge/github/LukynkaCZE/PrettyLog)
+
 # PrettyLog
 
 A Kotlin logging library focused on readability in console.
