@@ -5,10 +5,7 @@ plugins {
 }
 
 group = "cz.lukynka"
-version = "1.3"
-
-val githubUser: String = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USER")
-val githubPassword: String = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+version = "1.4"
 
 java.sourceCompatibility = JavaVersion.VERSION_17
 

@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    implementation("cz.lukynka:pretty-log:1.3")
+    implementation("cz.lukynka:pretty-log:1.4")
 }
 ```
 <img src="https://github.com/LukynkaCZE/PrettyLog/assets/48604271/3293feca-7395-4100-8b61-257ba40dbe3c" width="18px"></img>
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'cz.lukynka:pretty-log:1.3'
+    implementation 'cz.lukynka:pretty-log:1.4'
 }
 ```
 ## Logging
