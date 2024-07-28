@@ -1,3 +1,8 @@
+package cz.lukynka.prettylog
+
+
+import cz.lukynka.prettylog.LoggerFileWriter
+import cz.lukynka.prettylog.log
 import java.nio.file.FileSystemException
 
 fun main() {

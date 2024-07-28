@@ -1,3 +1,6 @@
+package cz.lukynka.prettylog
+
+
 object LoggerSettings {
     var saveToFile = true
     var saveDirectoryPath = "./logs/"

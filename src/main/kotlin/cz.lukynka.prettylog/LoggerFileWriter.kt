@@ -1,3 +1,5 @@
+package cz.lukynka.prettylog
+
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
@@ -21,11 +23,14 @@ object LoggerFileWriter {
 
         //Make sure the path has the correct format
         if(!LoggerSettings.saveDirectoryPath.endsWith("/")) LoggerSettings.saveDirectoryPath += "/"
-        file = File("${LoggerSettings.saveDirectoryPath}${logFileName}.log")
+        file = File("${LoggerSettings.saveDirectoryPath}$logFileName.log")
 
         // Create the directory if it doesn't exist
         if(!directoryExists(LoggerSettings.saveDirectoryPath)) {
-            log("[PrettyLog] Specified log directory (${LoggerSettings.saveDirectoryPath}) was not found, creating one..", LogType.WARNING)
+            log(
+                "[PrettyLog] Specified log directory (${LoggerSettings.saveDirectoryPath}) was not found, creating one..",
+                LogType.WARNING
+            )
             val path = Paths.get(LoggerSettings.saveDirectoryPath)
             Files.createDirectories(path)
             log("[PrettyLog] Log directory created!", LogType.SUCCESS)
