@@ -94,3 +94,8 @@ log("SERVER ROOM ON FIRE, DONT LET ASO RUN WHILE LOOPS EVER AGAIN", CustomLogTyp
 ```
 
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/93f82bab-1ccc-470b-8827-cfe4a1409a55)
+
+## Implementations in other languages
+
+- C#: https://github.com/dalibor-osu/PrettyLogSharp by [dalibor-osu](https://github.com/dalibor-osu)
+- Rust: https://github.com/aubreyrs/prettylog-rs by [aubreyrs](https://github.com/aubreyrs/)
