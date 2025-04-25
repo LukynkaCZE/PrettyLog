@@ -1,11 +1,18 @@
-package cz.lukynka.prettylog
-
-
+import cz.lukynka.prettylog.LogType
 import cz.lukynka.prettylog.LoggerFileWriter
 import cz.lukynka.prettylog.log
-import java.nio.file.FileSystemException
+import okio.IOException
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
-fun main() {
+class IDrawableTrack(private val file: String) {
+    fun play() {
+        throw IOException("$file is not valid music file in the format of MP3!")
+    }
+}
+
+@Test
+fun demo() {
     LoggerFileWriter.load()
 
     log("Running main() in Demo.kt..", LogType.DEBUG)
@@ -30,11 +37,7 @@ fun main() {
         track.play()
     } catch (exception: Exception) {
         log(exception)
+        assertEquals(exception.message, "maxwell.mp3 is not valid music file in the format of MP3!")
     }
 }
 
-class IDrawableTrack(private val file: String) {
-    fun play() {
-        throw FileSystemException("$file is not valid music file in the format of MP3!")
-    }
-}
