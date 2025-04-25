@@ -37,7 +37,7 @@ dependencies {
 }
 ```
 ## Logging
-Logging is very easy, just call the `log(message, type)` method. `type` parameter is optional and defaults to `RUNTIME`
+Logging is very easy, just add `LoggerFileWriter.load()` to your main function first, and then call the `log(message, type)` method. `type` parameter is optional and defaults to `RUNTIME`
 ```kotlin
 log("Hello there!")
 log("general kenobi", LogType.NETWORK)

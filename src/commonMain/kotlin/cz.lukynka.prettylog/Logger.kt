@@ -1,11 +1,10 @@
 package cz.lukynka.prettylog
 
-
 object LoggerSettings {
     var saveToFile = true
     var saveDirectoryPath = "./logs/"
     var loggerStyle = LoggerStyle.PREFIX
-    var logFileNameFormat = "yyyy-MM-dd-Hms"
+    var logFileNameFormat = "yyyy-MM-dd-HHmmss"
 }
 
 enum class LoggerStyle(val pattern: String) {
@@ -35,7 +34,5 @@ fun log(message: String, type: CustomLogType = LogType.RUNTIME) {
 
 fun log(exception: Exception) {
     log("$exception", LogType.EXCEPTION)
-    exception.stackTrace.forEach {
-        log("   $it", LogType.EXCEPTION)
-    }
+    log("   ${exception.stackTraceToString()}", LogType.EXCEPTION)
 }
