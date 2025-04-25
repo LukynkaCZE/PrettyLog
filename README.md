@@ -18,7 +18,9 @@ repositories {
 }
 
 dependencies {
-    implementation("cz.lukynka:pretty-log:1.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
+    implementation("com.squareup.okio:okio:3.10.2")
+    implementation("cz.lukynka:pretty-log:1.5")
 }
 ```
 <img src="https://github.com/LukynkaCZE/PrettyLog/assets/48604271/3293feca-7395-4100-8b61-257ba40dbe3c" width="18px"></img>
