@@ -33,11 +33,6 @@ fun log(message: String, type: CustomLogType = LogType.RUNTIME) {
 }
 
 fun log(exception: Exception) {
-    val exceptionResult = runCatching {
-        throw Exception("${exception.message}")
-    }
-
-    val exception = exceptionResult.exceptionOrNull()!!
     val stack = exception.stackTraceToString().split('\n')
     stack.forEach {
         log(it, LogType.EXCEPTION)
