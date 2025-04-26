@@ -15,13 +15,13 @@ import okio.SYSTEM
 import okio.buffer
 
 object LoggerFileWriter {
-    var isLoaded = false
-    lateinit var file: FileHandle
-    lateinit var outputBuffer: BufferedSink
+    private var isLoaded = false
+    private lateinit var file: FileHandle
+    private lateinit var outputBuffer: BufferedSink
     private val logFileName: String = LocalDateTime.Format { @OptIn(FormatStringsInDatetimeFormats::class) byUnicodePattern(LoggerSettings.logFileNameFormat) }.format(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()))
 
     // Store the logs that come before the FileWriter is loaded
-    var unloadedLogQueue = mutableListOf<Pair<String, CustomLogType>>()
+    private var unloadedLogQueue = mutableListOf<Pair<String, CustomLogType>>()
 
     fun load() {
         if(isLoaded) {
@@ -49,7 +49,7 @@ object LoggerFileWriter {
         isLoaded = true
 
         //Write all logs that came before the FileWriter is loaded
-        unloadedLogQueue.forEach { writeToFile(it.first, it.second) }
+        unloadedLogQueue.forEach { log -> writeToFile(log.first, log.second) }
     }
 
     fun writeToFile(message: String, type: CustomLogType) {
@@ -57,7 +57,6 @@ object LoggerFileWriter {
             unloadedLogQueue.add(Pair(message, type))
             return
         }
-//        val date = LocalDateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.default()).format(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()))
         val date = LocalDateTime.Format { @OptIn(FormatStringsInDatetimeFormats::class) byUnicodePattern("yyyy-MM-dd HH:mm:ss") }.format(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()))
         outputBuffer.writeUtf8("$date [${type.name.uppercase()}] $message\n").flush()
     }
