@@ -1,10 +1,10 @@
 plugins {
-    `maven-publish`
+    id("com.vanniktech.maven.publish") version "0.31.0"
     kotlin("multiplatform") version "2.1.20"
 }
 
 group = "cz.lukynka"
-version = "1.7"
+version = "1.8"
 
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -24,6 +24,11 @@ kotlin {
         commonMain.dependencies {
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
             implementation("com.squareup.okio:okio:3.10.2")
+        }
+
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(kotlin("test-common"))
         }
     }
 

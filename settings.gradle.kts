@@ -1,3 +1,1 @@
-
-rootProject.name = "PrettyLog"
-
+rootProject.name = "pretty-log"

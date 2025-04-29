@@ -7,6 +7,17 @@ PrettyLog takes advantage of ANSI color codes to make your logs look ✨ ***pret
 
 ## Installation
 
+As of 1.8, PrettyLog supports the following targets:
+
+- `jvm`
+- `mingwx64` [windows]
+- `macosx64`
+- `macosarm64`
+- `linuxx64`
+- `linuxarm64`
+
+Supporting both Kotlin/JVM and Kotlin/Native
+
 <img src="https://cdn.worldvectorlogo.com/logos/kotlin-2.svg" width="16px"></img>
 **Kotlin DSL**
 ```kotlin
@@ -20,7 +31,13 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
     implementation("com.squareup.okio:okio:3.10.2")
-    implementation("cz.lukynka:pretty-log:1.5")
+
+    // Import the common code
+    implementation("cz.lukynka:pretty-log:1.8")
+
+    // Import the platform-specific library. Do jvm if you're doing Kotlin/JVM / Java, 
+    // Do any other platform if you're doing Kotlin/Native [like linuxx64 or mingwx64]
+    implementation("cz.lukynka:pretty-log-PLATFORMNAMEHERE:1.8")
 }
 ```
 <img src="https://github.com/LukynkaCZE/PrettyLog/assets/48604271/3293feca-7395-4100-8b61-257ba40dbe3c" width="18px"></img>
@@ -37,11 +54,17 @@ repositories {
 dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.6.2'
     implementation 'com.squareup.okio:okio:3.10.2'
+    
+    // Import the common code
     implementation 'cz.lukynka:pretty-log:1.5'
+    
+    // Import the platform-specific library. Do jvm if you're doing Kotlin/JVM / Java, 
+    // Do any other platform if you're doing Kotlin/Native [like linuxx64 or mingwx64]
+    implementation 'cz.lukynka:pretty-log-PLATFORMNAMEHERE:1.8'
 }
 ```
 ## Logging
-Logging is very easy, just add `LoggerFileWriter.load()` to your main function first, and then call the `log(message, type)` method. `type` parameter is optional and defaults to `RUNTIME`
+Logging is very easy, just call the `log(message, type)` method. `type` parameter is optional and defaults to `RUNTIME`. Add `LoggerFileWriter.load()` to your main function if you want logs to be saved.
 ```kotlin
 log("Hello there!")
 log("general kenobi", LogType.NETWORK)
@@ -98,6 +121,16 @@ log("SERVER ROOM ON FIRE, DONT LET ASO RUN WHILE LOOPS EVER AGAIN", CustomLogTyp
 ```
 
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/93f82bab-1ccc-470b-8827-cfe4a1409a55)
+
+## Viewing what each log types look like using Tests
+
+Clone this project, open it up in IntelliJ IDEA, and once the project is loaded, in the Gradle tab, go to pretty-log -> Tasks -> verification -> Run [platform]Test
+
+![image](https://github.com/user-attachments/assets/3c8df998-4779-493a-bae7-b6057e04d854)
+
+![image](https://github.com/user-attachments/assets/456f6d22-7c22-47b2-821e-97bebca58050)
+
+Running jvmTest would be the most ideal as it'd be the most common to test for.
 
 ## Implementations in other languages
 
