@@ -47,9 +47,11 @@ bin/
 .idea/misc.xml
 .idea/uiDesigner.xml
 logs
-gradlew
-gradlew.bat
+
 .idea/discord.xml
 .idea/vcs.xml
-gradle/wrapper
 .idea
+
+
+local.properties
+kotlin-js-store

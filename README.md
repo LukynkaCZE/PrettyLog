@@ -15,8 +15,11 @@ As of 1.8, PrettyLog supports the following targets:
 - `macosarm64`
 - `linuxx64`
 - `linuxarm64`
+- `android`
+- `js` (browser and nodejs)
+- `wasmjs` (browser and nodejs)
 
-Supporting both Kotlin/JVM and Kotlin/Native
+Supporting Kotlin/JVM, Kotlin/Native, Kotlin/Android, Kotlin/JS, and Kotlin/Wasm
 
 <img src="https://cdn.worldvectorlogo.com/logos/kotlin-2.svg" width="16px"></img>
 **Kotlin DSL**
@@ -54,20 +57,20 @@ repositories {
 dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.6.2'
     implementation 'com.squareup.okio:okio:3.10.2'
-    
+
     // Import the common code
-    implementation 'cz.lukynka:pretty-log:1.5'
-    
+    implementation 'cz.lukynka:pretty-log:1.8'
+
     // Import the platform-specific library. Do jvm if you're doing Kotlin/JVM / Java, 
     // Do any other platform if you're doing Kotlin/Native [like linuxx64 or mingwx64]
     implementation 'cz.lukynka:pretty-log-PLATFORMNAMEHERE:1.8'
 }
 ```
 ## Logging
-Logging is very easy, just call the `log(message, type)` method. `type` parameter is optional and defaults to `RUNTIME`. Add `LoggerFileWriter.load()` to your main function if you want logs to be saved.
+Logging is very easy, just use the appropriate Log method with a lambda. Add `LoggerFileWriter.load()` to your main function if you want logs to be saved.
 ```kotlin
-log("Hello there!")
-log("general kenobi", LogType.NETWORK)
+Log.r { "Hello there!" }
+Log.n { "general kenobi" }
 ```
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/4052e4f2-6b69-4e95-a2ee-ba130615d82f)
 
@@ -75,7 +78,7 @@ log("general kenobi", LogType.NETWORK)
 You can also log exceptions!
 ```kotlin
 } catch (exception: Exception) {
-    log(exception)
+    Log.exception { exception }
 }
 ```
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/a5268ff2-7736-43df-bfb0-2a82bfc6ecc3)
@@ -99,25 +102,49 @@ There are 7 logger styles in total:
 
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/17c8ab17-3003-4c5a-a4dd-91c0b08203f8)
 
+### Log Severity Levels
+You can filter logs based on their severity level by setting the minimum severity level in LoggerSettings:
+
+```kotlin
+// Only show logs with WARNING severity or higher (WARNING, ERROR, FATAL)
+LoggerSettings.minimumSeverity = LogSeverity.WARNING
+
+// Only show logs with ERROR severity or higher (ERROR, FATAL)
+LoggerSettings.minimumSeverity = LogSeverity.ERROR
+
+// Show all logs (default)
+LoggerSettings.minimumSeverity = LogSeverity.TRACE
+```
+
+The available severity levels, from lowest to highest, are:
+- TRACE
+- DEBUG
+- INFO
+- WARNING
+- ERROR
+- FATAL
+
+Each log type has a default severity level assigned to it. For example, DEBUG logs have DEBUG severity, WARNING logs have WARNING severity, etc.
+
 ## Log Types
 There are 16 default log types: **Debug**, **Information**, **Runtime**, **Network**, **Success**, **Warning**, **Error**, **Exception**, **Critical**, **Audit**, **Trace**, **Security**, **User Action**, **Performance**, **Config**, and **Fatal**.
 
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/ee41b3a2-b2af-4ba8-a5d5-cfb7410b1065)
 
 ### Custom Log Types
-You can make custom log types by making object and then making vals in it with `CustomLogType(name, AnsiPair)` data class
+You can make custom log types by making object and then making vals in it with `CustomLogType(name, AnsiPair, LogSeverity)` data class. The LogSeverity parameter is optional and defaults to LogSeverity.INFO.
 
 ```kotlin
 object CustomLogTypes {
     val CUTE = CustomLogType("≽^•⩊•^≼", AnsiPair.CUTE_PINK)
     val GIT = CustomLogType("\uD83E\uDD16 Git", AnsiPair.AQUA)
-    val FIRE_WARNING = CustomLogType("\uD83D\uDD25 Fire Warning", AnsiPair.ORANGE)
+    val FIRE_WARNING = CustomLogType("\uD83D\uDD25 Fire Warning", AnsiPair.ORANGE, LogSeverity.WARNING)
 }
 ```
 ```kotlin
-log("T-This is vewy cuwute message OwO", CustomLogTypes.CUTE)
-log("refusing to merge unrelated histories", CustomLogTypes.GIT)
-log("SERVER ROOM ON FIRE, DONT LET ASO RUN WHILE LOOPS EVER AGAIN", CustomLogTypes.FIRE_WARNING)
+Log.custom(CustomLogTypes.CUTE) { "T-This is vewy cuwute message OwO" }
+Log.custom(CustomLogTypes.GIT) { "refusing to merge unrelated histories" }
+Log.custom(CustomLogTypes.FIRE_WARNING) { "SERVER ROOM ON FIRE, DONT LET ASO RUN WHILE LOOPS EVER AGAIN" }
 ```
 
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/93f82bab-1ccc-470b-8827-cfe4a1409a55)

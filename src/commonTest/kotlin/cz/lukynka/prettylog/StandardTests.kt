@@ -5,77 +5,130 @@ import kotlin.test.Test
 class StandardTests {
     @Test
     fun testDebug() {
-        log("Running testDebug() in StandardTests..", LogType.DEBUG)
+        Log.d { "Running testDebug() in StandardTests.." }
     }
 
     @Test
     fun testInformation() {
-        log("Very informative information", LogType.INFORMATION)
+        Log.i { "Very informative information" }
     }
 
     @Test
     fun testRuntime() {
-        log("I am running on time!", LogType.RUNTIME)
+        Log.r { "I am running on time!" }
     }
 
     @Test
     fun testNetwork() {
-        log("Downloading maxwell.mp3", LogType.NETWORK)
+        Log.n { "Downloading maxwell.mp3" }
     }
 
     @Test
     fun testSuccess() {
-        log("maxwell.mp3 has been downloaded!", LogType.SUCCESS)
+        Log.s { "maxwell.mp3 has been downloaded!" }
     }
 
     @Test
     fun testWarning() {
-        log("Warning.. file maxwell.mp3 may be corrupted!", LogType.WARNING)
+        Log.w { "Warning.. file maxwell.mp3 may be corrupted!" }
     }
 
     @Test
     fun testError() {
-        log("maxwell.mp3 cannot be played using IDrawableTrack", LogType.ERROR)
+        Log.e { "maxwell.mp3 cannot be played using IDrawableTrack" }
     }
 
     @Test
     fun testCritical() {
-        log("Critical issue detected in the payment system!", LogType.CRITICAL)
+        Log.c { "Critical issue detected in the payment system!" }
     }
 
     @Test
     fun testAudit() {
-        log("User SkibidyToilet727 accessed the admin panel", LogType.AUDIT)
+        Log.a { "User SkibidyToilet727 accessed the admin panel" }
     }
 
     @Test
     fun testTrace() {
-        log("Entering detailed trace mode for debugging", LogType.TRACE)
+        Log.t { "Entering detailed trace mode for debugging" }
     }
 
     @Test
     fun testSecurity() {
-        log("Security breach attempt detected!", LogType.SECURITY)
+        Log.sec { "Security breach attempt detected!" }
     }
 
     @Test
     fun testUserAction() {
-        log("NeuroSama updated her profile picture to bread.png", LogType.USER_ACTION)
+        Log.u { "NeuroSama updated her profile picture to bread.png" }
     }
 
     @Test
     fun testPerformance() {
-        log("Response time is 250ms", LogType.PERFORMANCE)
+        Log.p { "Response time is 250ms" }
     }
 
     @Test
     fun testConfig() {
-        log("MaxConnections set to 1000", LogType.CONFIG)
+        Log.conf { "MaxConnections set to 1000" }
     }
 
     @Test
     fun testFatal() {
-        log("Your life will be terminated", LogType.FATAL)
+        Log.f { "Your life will be terminated" }
+    }
+
+    @Test
+    fun testShowTimeToggle() {
+        // Save original setting
+        val originalShowTime = LoggerSettings.showTime
+
+        // Test with time shown (default)
+        LoggerSettings.showTime = true
+        Log.i { "This message should show time" }
+
+        // Test with time hidden
+        LoggerSettings.showTime = false
+        Log.i { "This message should NOT show time" }
+
+        // Restore original setting
+        LoggerSettings.showTime = originalShowTime
+    }
+
+    @Test
+    fun testSeverityFiltering() {
+        // Save original setting
+        val originalSeverity = LoggerSettings.minimumSeverity
+
+        // Set minimum severity to WARNING
+        LoggerSettings.minimumSeverity = LogSeverity.WARNING
+
+        println("--- Testing with minimum severity set to WARNING ---")
+
+        // These should NOT be logged (below WARNING)
+        Log.d { "This DEBUG message should NOT be logged" }
+        Log.i { "This INFO message should NOT be logged" }
+
+        // These should be logged (WARNING or above)
+        Log.w { "This WARNING message should be logged" }
+        Log.e { "This ERROR message should be logged" }
+        Log.f { "This FATAL message should be logged" }
+
+        // Set minimum severity to ERROR
+        LoggerSettings.minimumSeverity = LogSeverity.ERROR
+
+        println("--- Testing with minimum severity set to ERROR ---")
+
+        // These should NOT be logged (below ERROR)
+        Log.d { "This DEBUG message should NOT be logged" }
+        Log.i { "This INFO message should NOT be logged" }
+        Log.w { "This WARNING message should NOT be logged" }
+
+        // These should be logged (ERROR or above)
+        Log.e { "This ERROR message should be logged" }
+        Log.f { "This FATAL message should be logged" }
+
+        // Restore original setting
+        LoggerSettings.minimumSeverity = originalSeverity
     }
 }
-

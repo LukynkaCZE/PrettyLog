@@ -17,7 +17,7 @@ class ExceptionTests {
             val track = IDrawableTrack("maxwell.mp3")
             track.play()
         } catch (exception: Exception) {
-            log(exception)
+            Log.exception { exception }
             assertEquals(exception.message, "maxwell.mp3 is not valid music file in the format of MP3!")
         }
     }
