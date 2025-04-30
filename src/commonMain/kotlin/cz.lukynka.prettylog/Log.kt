@@ -22,22 +22,87 @@ enum class LoggerStyle(val pattern: String) {
  * Each method accepts a lambda that is only evaluated if the log will be processed.
  */
 object Log {
+    /**
+     * Logs a debug message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun d(messageProvider: () -> String) = logInternal(messageProvider(), LogType.DEBUG)
+    /**
+     * Logs an information message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun i(messageProvider: () -> String) = logInternal(messageProvider(), LogType.INFORMATION)
+    /**
+     * Logs a runtime message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun r(messageProvider: () -> String) = logInternal(messageProvider(), LogType.RUNTIME)
+    /**
+     * Logs a network message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun n(messageProvider: () -> String) = logInternal(messageProvider(), LogType.NETWORK)
+    /**
+     * Logs a success message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun s(messageProvider: () -> String) = logInternal(messageProvider(), LogType.SUCCESS)
+    /**
+     * Logs a warning message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun w(messageProvider: () -> String) = logInternal(messageProvider(), LogType.WARNING)
+    /**
+     * Logs an error message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun e(messageProvider: () -> String) = logInternal(messageProvider(), LogType.ERROR)
+    /**
+     * Logs a critical message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun c(messageProvider: () -> String) = logInternal(messageProvider(), LogType.CRITICAL)
+    /**
+     * Logs an audit message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun a(messageProvider: () -> String) = logInternal(messageProvider(), LogType.AUDIT)
+    /**
+     * Logs a trace message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun t(messageProvider: () -> String) = logInternal(messageProvider(), LogType.TRACE)
+    /**
+     * Logs a security message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun sec(messageProvider: () -> String) = logInternal(messageProvider(), LogType.SECURITY)
+    /**
+     * Logs a user action message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun u(messageProvider: () -> String) = logInternal(messageProvider(), LogType.USER_ACTION)
+    /**
+     * Logs a performance message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun p(messageProvider: () -> String) = logInternal(messageProvider(), LogType.PERFORMANCE)
+    /**
+     * Logs a configuration message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun conf(messageProvider: () -> String) = logInternal(messageProvider(), LogType.CONFIG)
+    /**
+     * Logs a fatal message.
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun f(messageProvider: () -> String) = logInternal(messageProvider(), LogType.FATAL)
 
+    /**
+     * Logs a message with a custom log type.
+     * @param type The custom log type to use
+     * @param messageProvider A lambda that provides the message to log
+     */
     fun custom(type: CustomLogType, messageProvider: () -> String) = logInternal(messageProvider(), type)
 
     /**
@@ -48,6 +113,10 @@ object Log {
         exceptionInternal(exception)
     }
 
+    /**
+     * Logs an exception with stack trace.
+     * @param exceptionProvider A lambda that provides the exception to log
+     */
     fun exception(exceptionProvider: () -> Exception) {
         exceptionInternal(exceptionProvider())
     }
