@@ -20,6 +20,13 @@ android {
 
     defaultConfig {
         minSdk = 21
+    }
+
+    testOptions {
+        targetSdk = 34
+    }
+
+    lint {
         targetSdk = 34
     }
 
