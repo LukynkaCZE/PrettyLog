@@ -48,6 +48,11 @@ kotlin {
         nodejs()
     }
 
+    // Add compiler flag to suppress expect/actual classes Beta warning
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+
     sourceSets {
         commonMain.dependencies {
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
