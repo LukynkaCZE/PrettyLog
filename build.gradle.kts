@@ -9,10 +9,6 @@ version = "1.8"
 
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-repositories {
-    mavenCentral()
-    google()
-}
 
 android {
     compileSdk = 34
