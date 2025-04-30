@@ -6,18 +6,13 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toLocalDateTime
-import okio.BufferedSink
-import okio.FileHandle
-import okio.FileSystem
 import okio.Path
 import okio.Path.Companion.toPath
-import okio.SYSTEM
-import okio.buffer
 
 object LoggerFileWriter {
     private var isLoaded = false
-    private lateinit var file: FileHandle
-    private lateinit var outputBuffer: BufferedSink
+    private lateinit var file: FileHandleWrapper
+    private lateinit var outputBuffer: SinkWrapper
     private val logFileName: String = LocalDateTime.Format { @OptIn(FormatStringsInDatetimeFormats::class) byUnicodePattern(LoggerSettings.logFileNameFormat) }.format(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()))
 
     // Store the logs that come before the FileWriter is loaded
@@ -36,14 +31,14 @@ object LoggerFileWriter {
                 LogType.WARNING
             )
             val path = LoggerSettings.saveDirectoryPath.toPath()
-            FileSystem.SYSTEM.createDirectories(path)
+            FileSystemAccess.createDirectories(path)
             log("[PrettyLog] Log directory created!", LogType.SUCCESS)
         }
 
         //Make sure the path has the correct format
         if(!LoggerSettings.saveDirectoryPath.endsWith("/")) LoggerSettings.saveDirectoryPath += "/"
-        file = FileSystem.SYSTEM.openReadWrite("${LoggerSettings.saveDirectoryPath}$logFileName.log".toPath(), mustCreate = true)
-        outputBuffer = file.appendingSink().buffer()
+        file = FileSystemAccess.openReadWriteFile("${LoggerSettings.saveDirectoryPath}$logFileName.log".toPath(), mustCreate = true)
+        outputBuffer = file.appendingSink()
 
         //Mark the FileWriter as loaded
         isLoaded = true
@@ -64,5 +59,5 @@ object LoggerFileWriter {
 
 fun directoryExists(directoryPath: String): Boolean {
     val path: Path = directoryPath.toPath()
-    return FileSystem.SYSTEM.exists(path) && FileSystem.SYSTEM.metadata(path).isDirectory
+    return FileSystemAccess.exists(path) && FileSystemAccess.isDirectory(path)
 }

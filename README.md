@@ -15,8 +15,11 @@ As of 1.8, PrettyLog supports the following targets:
 - `macosarm64`
 - `linuxx64`
 - `linuxarm64`
+- `android`
+- `js` (browser and nodejs)
+- `wasmjs` (browser and nodejs)
 
-Supporting both Kotlin/JVM and Kotlin/Native
+Supporting Kotlin/JVM, Kotlin/Native, Kotlin/Android, Kotlin/JS, and Kotlin/Wasm
 
 <img src="https://cdn.worldvectorlogo.com/logos/kotlin-2.svg" width="16px"></img>
 **Kotlin DSL**
