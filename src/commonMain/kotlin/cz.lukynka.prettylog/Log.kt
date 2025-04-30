@@ -13,6 +13,8 @@ object LoggerSettings {
     var loggerStyle = LoggerStyle.PREFIX
     var logFileNameFormat = "yyyy-MM-dd-HHmmss"
     var logTimeFormat = "HH:mm:ss"
+    var showTime = true
+    var minimumSeverity = LogSeverity.TRACE // Default to show all logs
 }
 
 enum class LoggerStyle(val pattern: String) {
@@ -140,6 +142,11 @@ object Log {
      * Internal logging function that doesn't use deprecated APIs
      */
     private fun logInternal(message: String, type: CustomLogType) {
+        // Check if the log severity meets the minimum requirement
+        if (type.severity.ordinal < LoggerSettings.minimumSeverity.ordinal) {
+            return // Skip logging if severity is below the minimum
+        }
+
         var pattern = LoggerSettings.loggerStyle.pattern
         if(type == LogType.FATAL) pattern = LoggerStyle.FULL.pattern
 
@@ -155,7 +162,7 @@ object Log {
         pattern = pattern.replace("<foreground>", type.colorPair.foreground.code)
         pattern = pattern.replace("<black>", AnsiColor.BLACK.code)
         pattern = pattern.replace("<emoji>", emoji)
-        pattern = pattern.replace("<time>", currentTime)
+        pattern = pattern.replace("<time>", if (LoggerSettings.showTime) currentTime else "")
         pattern = pattern.replace("<type>", typeName)
         pattern = pattern.replace("<message>", message)
         pattern = pattern.replace("<reset>", AnsiColor.RESET.code)
@@ -171,6 +178,11 @@ object Log {
  */
 @Deprecated("Use Logger.custom(type) { \"message\" } instead for better performance", ReplaceWith("Logger.custom(type) { message }"))
 fun log(message: String, type: CustomLogType = LogType.RUNTIME) {
+    // Check if the log severity meets the minimum requirement
+    if (type.severity.ordinal < LoggerSettings.minimumSeverity.ordinal) {
+        return // Skip logging if severity is below the minimum
+    }
+
     var pattern = LoggerSettings.loggerStyle.pattern
     if(type == LogType.FATAL) pattern = LoggerStyle.FULL.pattern
 
@@ -186,7 +198,7 @@ fun log(message: String, type: CustomLogType = LogType.RUNTIME) {
     pattern = pattern.replace("<foreground>", type.colorPair.foreground.code)
     pattern = pattern.replace("<black>", AnsiColor.BLACK.code)
     pattern = pattern.replace("<emoji>", emoji)
-    pattern = pattern.replace("<time>", currentTime)
+    pattern = pattern.replace("<time>", if (LoggerSettings.showTime) currentTime else "")
     pattern = pattern.replace("<type>", typeName)
     pattern = pattern.replace("<message>", message)
     pattern = pattern.replace("<reset>", AnsiColor.RESET.code)

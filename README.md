@@ -54,10 +54,10 @@ repositories {
 dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.6.2'
     implementation 'com.squareup.okio:okio:3.10.2'
-    
+
     // Import the common code
     implementation 'cz.lukynka:pretty-log:1.5'
-    
+
     // Import the platform-specific library. Do jvm if you're doing Kotlin/JVM / Java, 
     // Do any other platform if you're doing Kotlin/Native [like linuxx64 or mingwx64]
     implementation 'cz.lukynka:pretty-log-PLATFORMNAMEHERE:1.8'
@@ -98,6 +98,30 @@ LoggerSettings.loggerStyle = LoggerStyle.PREFIX
 There are 7 logger styles in total:
 
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/17c8ab17-3003-4c5a-a4dd-91c0b08203f8)
+
+### Log Severity Levels
+You can filter logs based on their severity level by setting the minimum severity level in LoggerSettings:
+
+```kotlin
+// Only show logs with WARNING severity or higher (WARNING, ERROR, FATAL)
+LoggerSettings.minimumSeverity = LogSeverity.WARNING
+
+// Only show logs with ERROR severity or higher (ERROR, FATAL)
+LoggerSettings.minimumSeverity = LogSeverity.ERROR
+
+// Show all logs (default)
+LoggerSettings.minimumSeverity = LogSeverity.TRACE
+```
+
+The available severity levels, from lowest to highest, are:
+- TRACE
+- DEBUG
+- INFO
+- WARNING
+- ERROR
+- FATAL
+
+Each log type has a default severity level assigned to it. For example, DEBUG logs have DEBUG severity, WARNING logs have WARNING severity, etc.
 
 ## Log Types
 There are 16 default log types: **Debug**, **Information**, **Runtime**, **Network**, **Success**, **Warning**, **Error**, **Exception**, **Critical**, **Audit**, **Trace**, **Security**, **User Action**, **Performance**, **Config**, and **Fatal**.

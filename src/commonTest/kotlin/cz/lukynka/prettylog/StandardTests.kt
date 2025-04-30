@@ -77,4 +77,58 @@ class StandardTests {
     fun testFatal() {
         Log.f { "Your life will be terminated" }
     }
+
+    @Test
+    fun testShowTimeToggle() {
+        // Save original setting
+        val originalShowTime = LoggerSettings.showTime
+
+        // Test with time shown (default)
+        LoggerSettings.showTime = true
+        Log.i { "This message should show time" }
+
+        // Test with time hidden
+        LoggerSettings.showTime = false
+        Log.i { "This message should NOT show time" }
+
+        // Restore original setting
+        LoggerSettings.showTime = originalShowTime
+    }
+
+    @Test
+    fun testSeverityFiltering() {
+        // Save original setting
+        val originalSeverity = LoggerSettings.minimumSeverity
+
+        // Set minimum severity to WARNING
+        LoggerSettings.minimumSeverity = LogSeverity.WARNING
+
+        println("--- Testing with minimum severity set to WARNING ---")
+
+        // These should NOT be logged (below WARNING)
+        Log.d { "This DEBUG message should NOT be logged" }
+        Log.i { "This INFO message should NOT be logged" }
+
+        // These should be logged (WARNING or above)
+        Log.w { "This WARNING message should be logged" }
+        Log.e { "This ERROR message should be logged" }
+        Log.f { "This FATAL message should be logged" }
+
+        // Set minimum severity to ERROR
+        LoggerSettings.minimumSeverity = LogSeverity.ERROR
+
+        println("--- Testing with minimum severity set to ERROR ---")
+
+        // These should NOT be logged (below ERROR)
+        Log.d { "This DEBUG message should NOT be logged" }
+        Log.i { "This INFO message should NOT be logged" }
+        Log.w { "This WARNING message should NOT be logged" }
+
+        // These should be logged (ERROR or above)
+        Log.e { "This ERROR message should be logged" }
+        Log.f { "This FATAL message should be logged" }
+
+        // Restore original setting
+        LoggerSettings.minimumSeverity = originalSeverity
+    }
 }
