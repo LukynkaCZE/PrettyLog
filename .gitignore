@@ -53,3 +53,7 @@ gradlew.bat
 .idea/vcs.xml
 gradle/wrapper
 .idea
+
+
+local.properties
+kotlin-js-store
