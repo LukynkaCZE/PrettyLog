@@ -5,77 +5,76 @@ import kotlin.test.Test
 class StandardTests {
     @Test
     fun testDebug() {
-        log("Running testDebug() in StandardTests..", LogType.DEBUG)
+        Log.d { "Running testDebug() in StandardTests.." }
     }
 
     @Test
     fun testInformation() {
-        log("Very informative information", LogType.INFORMATION)
+        Log.i { "Very informative information" }
     }
 
     @Test
     fun testRuntime() {
-        log("I am running on time!", LogType.RUNTIME)
+        Log.r { "I am running on time!" }
     }
 
     @Test
     fun testNetwork() {
-        log("Downloading maxwell.mp3", LogType.NETWORK)
+        Log.n { "Downloading maxwell.mp3" }
     }
 
     @Test
     fun testSuccess() {
-        log("maxwell.mp3 has been downloaded!", LogType.SUCCESS)
+        Log.s { "maxwell.mp3 has been downloaded!" }
     }
 
     @Test
     fun testWarning() {
-        log("Warning.. file maxwell.mp3 may be corrupted!", LogType.WARNING)
+        Log.w { "Warning.. file maxwell.mp3 may be corrupted!" }
     }
 
     @Test
     fun testError() {
-        log("maxwell.mp3 cannot be played using IDrawableTrack", LogType.ERROR)
+        Log.e { "maxwell.mp3 cannot be played using IDrawableTrack" }
     }
 
     @Test
     fun testCritical() {
-        log("Critical issue detected in the payment system!", LogType.CRITICAL)
+        Log.c { "Critical issue detected in the payment system!" }
     }
 
     @Test
     fun testAudit() {
-        log("User SkibidyToilet727 accessed the admin panel", LogType.AUDIT)
+        Log.a { "User SkibidyToilet727 accessed the admin panel" }
     }
 
     @Test
     fun testTrace() {
-        log("Entering detailed trace mode for debugging", LogType.TRACE)
+        Log.t { "Entering detailed trace mode for debugging" }
     }
 
     @Test
     fun testSecurity() {
-        log("Security breach attempt detected!", LogType.SECURITY)
+        Log.sec { "Security breach attempt detected!" }
     }
 
     @Test
     fun testUserAction() {
-        log("NeuroSama updated her profile picture to bread.png", LogType.USER_ACTION)
+        Log.u { "NeuroSama updated her profile picture to bread.png" }
     }
 
     @Test
     fun testPerformance() {
-        log("Response time is 250ms", LogType.PERFORMANCE)
+        Log.p { "Response time is 250ms" }
     }
 
     @Test
     fun testConfig() {
-        log("MaxConnections set to 1000", LogType.CONFIG)
+        Log.conf { "MaxConnections set to 1000" }
     }
 
     @Test
     fun testFatal() {
-        log("Your life will be terminated", LogType.FATAL)
+        Log.f { "Your life will be terminated" }
     }
 }
-
