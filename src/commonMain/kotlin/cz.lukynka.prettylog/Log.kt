@@ -1,20 +1,28 @@
 package cz.lukynka.prettylog
 
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
+import kotlinx.datetime.toLocalDateTime
+
 object LoggerSettings {
     var saveToFile = true
     var saveDirectoryPath = "./logs/"
     var loggerStyle = LoggerStyle.PREFIX
     var logFileNameFormat = "yyyy-MM-dd-HHmmss"
+    var logTimeFormat = "HH:mm:ss"
 }
 
 enum class LoggerStyle(val pattern: String) {
-    FULL("<background><black><prefix>: <message>"),
-    PREFIX("<background><black><prefix>:<reset> <foreground><message>"),
-    SUFFIX("<foreground><prefix>: <background><black><message>"),
-    TEXT_ONLY("<foreground><prefix>: <message>"),
-    PREFIX_WHITE_TEXT("<background><black><prefix>:<reset> <message>"),
-    BRACKET_PREFIX("<foreground><bold>[<prefix>]<reset><foreground> <message>"),
-    BRACKET_PREFIX_WHITE_TEXT("<foreground><bold>[<prefix>] <reset><message>")
+    FULL("<background><black><emoji> <time> <type>: <message>"),
+    PREFIX("<background><black><emoji> <time> <type>:<reset> <foreground><message>"),
+    SUFFIX("<foreground><emoji> <time> <type>: <background><black><message>"),
+    TEXT_ONLY("<foreground><emoji> <time> <type>: <message>"),
+    PREFIX_WHITE_TEXT("<background><black><emoji> <time> <type>:<reset> <message>"),
+    BRACKET_PREFIX("<foreground><bold>[<emoji> <time> <type>]<reset><foreground> <message>"),
+    BRACKET_PREFIX_WHITE_TEXT("<foreground><bold>[<emoji> <time> <type>] <reset><message>")
 }
 
 /**
@@ -134,10 +142,21 @@ object Log {
     private fun logInternal(message: String, type: CustomLogType) {
         var pattern = LoggerSettings.loggerStyle.pattern
         if(type == LogType.FATAL) pattern = LoggerStyle.FULL.pattern
+
+        // Extract emoji and type name
+        val emojiAndType = extractEmojiAndType(type.name)
+        val emoji = emojiAndType.first
+        val typeName = emojiAndType.second
+
+        // Get current time
+        val currentTime = getCurrentTime()
+
         pattern = pattern.replace("<background>", type.colorPair.background.code)
         pattern = pattern.replace("<foreground>", type.colorPair.foreground.code)
         pattern = pattern.replace("<black>", AnsiColor.BLACK.code)
-        pattern = pattern.replace("<prefix>", type.name)
+        pattern = pattern.replace("<emoji>", emoji)
+        pattern = pattern.replace("<time>", currentTime)
+        pattern = pattern.replace("<type>", typeName)
         pattern = pattern.replace("<message>", message)
         pattern = pattern.replace("<reset>", AnsiColor.RESET.code)
         pattern = pattern.replace("<bold>", AnsiColor.BOLD.code)
@@ -154,10 +173,21 @@ object Log {
 fun log(message: String, type: CustomLogType = LogType.RUNTIME) {
     var pattern = LoggerSettings.loggerStyle.pattern
     if(type == LogType.FATAL) pattern = LoggerStyle.FULL.pattern
+
+    // Extract emoji and type name
+    val emojiAndType = extractEmojiAndType(type.name)
+    val emoji = emojiAndType.first
+    val typeName = emojiAndType.second
+
+    // Get current time
+    val currentTime = getCurrentTime()
+
     pattern = pattern.replace("<background>", type.colorPair.background.code)
     pattern = pattern.replace("<foreground>", type.colorPair.foreground.code)
     pattern = pattern.replace("<black>", AnsiColor.BLACK.code)
-    pattern = pattern.replace("<prefix>", type.name)
+    pattern = pattern.replace("<emoji>", emoji)
+    pattern = pattern.replace("<time>", currentTime)
+    pattern = pattern.replace("<type>", typeName)
     pattern = pattern.replace("<message>", message)
     pattern = pattern.replace("<reset>", AnsiColor.RESET.code)
     pattern = pattern.replace("<bold>", AnsiColor.BOLD.code)
@@ -172,4 +202,30 @@ fun log(message: String, type: CustomLogType = LogType.RUNTIME) {
 @Deprecated("Use Logger.exception(exception) instead for better performance", ReplaceWith("Logger.exception(exception)"))
 fun log(exception: Exception) {
     Log.exception(exception)
+}
+
+/**
+ * Extracts emoji and type name from the full name
+ * @param fullName The full name including emoji and type
+ * @return Pair of emoji and type name
+ */
+internal fun extractEmojiAndType(fullName: String): Pair<String, String> {
+    // Find the first space which separates emoji and type name
+    val spaceIndex = fullName.indexOf(' ')
+    if (spaceIndex == -1) return Pair("", fullName)
+
+    val emoji = fullName.substring(0, spaceIndex)
+    val typeName = fullName.substring(spaceIndex + 1)
+    return Pair(emoji, typeName)
+}
+
+/**
+ * Gets the current time formatted according to settings
+ * @return Formatted current time
+ */
+internal fun getCurrentTime(): String {
+    return LocalDateTime.Format { 
+        @OptIn(FormatStringsInDatetimeFormats::class) 
+        byUnicodePattern(LoggerSettings.logTimeFormat) 
+    }.format(Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()))
 }
