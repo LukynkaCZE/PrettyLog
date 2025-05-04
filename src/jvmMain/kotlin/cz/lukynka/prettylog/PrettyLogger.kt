@@ -6,7 +6,7 @@ import org.slf4j.helpers.MessageFormatter
 
 // TODO Implement SLF4J Marker support.
 
-class PrettyLogger(name: String) : Logger {
+class PrettyLogger(val name: String) : Logger {
     override fun getName(): String = this.name
 
     //region Trace
