@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "cz.lukynka"
-version = "1.8"
+version = "1.9"
 
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -29,6 +29,14 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation(kotlin("test-common"))
+        }
+
+        jvmMain.dependencies {
+            api("org.slf4j:slf4j-api:2.0.17")
+        }
+
+        jvmTest.dependencies {
+            implementation(kotlin("test"))
         }
     }
 
