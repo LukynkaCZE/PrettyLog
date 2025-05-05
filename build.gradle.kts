@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "cz.lukynka"
-version = "1.10-SNAPSHOT"
+version = "1.11"
 
 java.sourceCompatibility = JavaVersion.VERSION_21
 
@@ -57,7 +57,7 @@ publishing {
     publications {
         register<MavenPublication>("maven") {
             groupId = "cz.lukynka"
-            artifactId = "pretty-log"
+            artifactId = "pretty-log-common"
             version = version
         }
     }

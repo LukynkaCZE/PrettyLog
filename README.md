@@ -7,10 +7,10 @@ PrettyLog takes advantage of ANSI color codes to make your logs look ✨ ***pret
 
 ## Installation
 
-As of 1.8, PrettyLog supports the following targets:
+As of 1.11, PrettyLog supports the following targets:
 
-- `jvm`
-- `mingwx64` [windows]
+- `jvm` (Java 21)
+- `mingwx64` (Windows)
 - `macosx64`
 - `macosarm64`
 - `linuxx64`
@@ -33,36 +33,14 @@ dependencies {
     implementation("com.squareup.okio:okio:3.10.2")
 
     // Import the common code
-    implementation("cz.lukynka:pretty-log:1.8")
+    implementation("cz.lukynka:pretty-log:1.11")
 
     // Import the platform-specific library. Do jvm if you're doing Kotlin/JVM / Java, 
     // Do any other platform if you're doing Kotlin/Native [like linuxx64 or mingwx64]
-    implementation("cz.lukynka:pretty-log-PLATFORMNAMEHERE:1.8")
+    implementation("cz.lukynka:pretty-log-PLATFORMNAMEHERE:1.11")
 }
 ```
-<img src="https://github.com/LukynkaCZE/PrettyLog/assets/48604271/3293feca-7395-4100-8b61-257ba40dbe3c" width="18px"></img>
-**Gradle Groovy**
-```groovy
-repositories {
-    mavenCentral()
-    maven {
-        name "devOS"
-        url "https://mvn.devos.one/releases"
-    }
-}
 
-dependencies {
-    implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.6.2'
-    implementation 'com.squareup.okio:okio:3.10.2'
-    
-    // Import the common code
-    implementation 'cz.lukynka:pretty-log:1.5'
-    
-    // Import the platform-specific library. Do jvm if you're doing Kotlin/JVM / Java, 
-    // Do any other platform if you're doing Kotlin/Native [like linuxx64 or mingwx64]
-    implementation 'cz.lukynka:pretty-log-PLATFORMNAMEHERE:1.8'
-}
-```
 ## Logging
 Logging is very easy, just call the `log(message, type)` method. `type` parameter is optional and defaults to `RUNTIME`. Add `LoggerFileWriter.load()` to your main function if you want logs to be saved.
 ```kotlin
