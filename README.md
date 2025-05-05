@@ -33,7 +33,7 @@ dependencies {
     implementation("com.squareup.okio:okio:3.10.2")
 
     // Import the common code
-    implementation("cz.lukynka:pretty-log:1.11")
+    implementation("cz.lukynka:pretty-log-common:1.11")
 
     // Import the platform-specific library. Do jvm if you're doing Kotlin/JVM / Java, 
     // Do any other platform if you're doing Kotlin/Native [like linuxx64 or mingwx64]
