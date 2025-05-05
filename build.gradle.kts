@@ -1,12 +1,12 @@
 plugins {
-    id("com.vanniktech.maven.publish") version "0.31.0"
+    `maven-publish`
     kotlin("multiplatform") version "2.1.20"
 }
 
 group = "cz.lukynka"
-version = "1.9"
+version = "1.10-SNAPSHOT"
 
-java.sourceCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories {
     mavenCentral()
@@ -40,13 +40,13 @@ kotlin {
         }
     }
 
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 publishing {
     repositories {
         maven {
-            url = uri("https://mvn.devos.one/releases")
+            url = if(version.toString().contains("-SNAPSHOT")) uri("https://mvn.devos.one/snapshots") else uri("https://mvn.devos.one/releases")
             credentials {
                 username = System.getenv()["MAVEN_USER"]
                 password = System.getenv()["MAVEN_PASS"]
