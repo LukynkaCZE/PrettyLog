@@ -5,6 +5,7 @@ object LoggerSettings {
     var saveDirectoryPath = "./logs/"
     var loggerStyle = LoggerStyle.PREFIX
     var logFileNameFormat = "yyyy-MM-dd-HHmmss"
+    var disabledLogTypes = setOf<CustomLogType>()
 }
 
 enum class LoggerStyle(val pattern: String) {
@@ -18,6 +19,9 @@ enum class LoggerStyle(val pattern: String) {
 }
 
 fun log(message: String, type: CustomLogType = LogType.RUNTIME) {
+    if (LoggerSettings.disabledLogTypes.contains(type))
+        return
+
     var pattern = LoggerSettings.loggerStyle.pattern
     if(type == LogType.FATAL) pattern = LoggerStyle.FULL.pattern
     pattern = pattern.replace("<background>", type.colorPair.background.code)
