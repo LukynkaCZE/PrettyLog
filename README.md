@@ -1,12 +1,14 @@
 
-# ✨ PrettyLog 
-[![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fmvn.devos.one%2Freleases%2Fio%2Fgithub%2Fdockyardmc%2Fdockyard%2Fmaven-metadata.xml&style=for-the-badge&logo=maven&logoColor=%23FFFFFF&label=Latest%20Version&color=%23afff87)](https://mvn.devos.one/#/releases/io/github/dockyardmc/dockyard)
+# 🌈 PrettyLog ✨
+[![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fmvn.devos.one%2Freleases%2Fcz%2Flukynka%2Fpretty-log-common%2Fmaven-metadata.xml&style=for-the-badge&logo=maven&logoColor=%23FFFFFF&label=Latest%20Version&color=%23afff87)](https://mvn.devos.one/#/releases/io/github/dockyardmc/dockyard)
 [![wakatime](https://wakatime.com/badge/github/LukynkaCZE/PrettyLog.svg?style=for-the-badge)](https://wakatime.com/badge/github/LukynkaCZE/PrettyLog)
 [![Language](https://img.shields.io/badge/Language-Kotlin-Kotlin?style=for-the-badge&color=%23ff6969)](https://kotlinlang.org/)
 
 
 A Kotlin logging library focused on readability in console.
 PrettyLog takes advantage of ANSI color codes to make your logs look ✨ ***pretty*** ✨.
+
+<img width="716" height="80" alt="image" src="https://github.com/user-attachments/assets/5b8e6ddc-3e4b-4107-8e54-e579bfc6dfc3" />
 
 ## Installation
 
@@ -86,7 +88,7 @@ You can make custom log types by making your own `LogType` instance. Everything 
 ```kotlin
 // Create custom log prefix
 val customLogStyle = LogStyle(textColor = AnsiColor.BLACK, backgroundColor = AnsiColor.CUTE_PINK_BACKGROUND)
-val customLogPrefix = LogPrefix(" ≽^•⩊•^≼ ", customLogStyle)
+val customLogPrefix = StaticLogPrefix(" ≽^•⩊•^≼ ", customLogStyle)
 
 // Create custom log type
 val customLogType = LogType(textStyle = LogStyle.CUTE_PINK, listOf(customLogPrefix))
@@ -94,15 +96,17 @@ val customLogType = LogType(textStyle = LogStyle.CUTE_PINK, listOf(customLogPref
 log("T-This is vewy cuwute message OwO", customLogType)
 ```
 
-TODO image here
+<img width="490" height="86" alt="image" src="https://github.com/user-attachments/assets/7c8a1f30-93c8-4211-b906-e1b36fda2032" />
+
+You may also use `DynamicLogPrefix` which has field for text supplier instead of static string
 
 ---
 ## Loggers with custom prefixes
 
 You can add multiple prefixes to a custom logger. For example, we can add "Inbound" prefix and a "Proxy" for better understanding what is being logged and from where
 ```kotlin
-val proxyPrefix = LogPrefix(" Proxy ", LogStyle.FILLED_PURPLE)
-val inboundPrefix = LogPrefix("-> Inbound ", LogStyle.GRAY)
+val proxyPrefix = StaticLogPrefix(" Proxy ", LogStyle.FILLED_PURPLE)
+val inboundPrefix = StaticLogPrefix("-> Inbound ", LogStyle.GRAY)
 // create custom instance of PrettyLogger
 val logger = PrettyLogger(inboundPrefix, proxyPrefix)
 
@@ -112,7 +116,8 @@ Events.on<PacketReceivedEvent> { event ->
 }
 ```
 
-TODO image here
+<img width="731" height="121" alt="image" src="https://github.com/user-attachments/assets/e0718309-48fc-4483-b8db-99502ae44aa9" />
+
 
 ## Implementations in other languages
 
