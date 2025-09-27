@@ -7,8 +7,11 @@ import org.slf4j.spi.MDCAdapter
 import org.slf4j.spi.SLF4JServiceProvider
 
 class PrettyLoggerProvider : SLF4JServiceProvider {
-    private val REQUESTED_API_VERSION = "2.0.17"
-    private lateinit var prettyLoggerFactory: PrettyLoggerFactory
+    companion object {
+        const val REQUESTED_API_VERSION = "2.0.17"
+    }
+
+    private lateinit var prettyLoggerFactory: Slf4jPrettyLoggerFactory
 
     override fun getLoggerFactory(): ILoggerFactory = prettyLoggerFactory
     override fun getMarkerFactory(): IMarkerFactory? = null
@@ -16,6 +19,6 @@ class PrettyLoggerProvider : SLF4JServiceProvider {
     override fun getRequestedApiVersion(): String = REQUESTED_API_VERSION
 
     override fun initialize() {
-        prettyLoggerFactory =  PrettyLoggerFactory()
+        prettyLoggerFactory = Slf4jPrettyLoggerFactory()
     }
 }

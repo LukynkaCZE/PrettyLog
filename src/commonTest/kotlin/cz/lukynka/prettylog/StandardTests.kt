@@ -1,8 +1,15 @@
 package cz.lukynka.prettylog
 
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 class StandardTests {
+
+    @BeforeTest
+    fun before() {
+        if (!LoggerFileWriter.isLoaded) LoggerFileWriter.load()
+    }
+
     @Test
     fun testDebug() {
         log("Running testDebug() in StandardTests..", LogType.DEBUG)

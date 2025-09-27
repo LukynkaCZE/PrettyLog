@@ -4,12 +4,12 @@ import org.slf4j.Logger
 import org.slf4j.Marker
 import org.slf4j.helpers.MessageFormatter
 
-class PrettyLogger(val loggerName: String) : Logger {
+class Slf4jPrettyLogger(val loggerName: String) : Logger {
 
     override fun getName(): String = this.loggerName
 
     //region Trace
-    override fun isTraceEnabled(): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.TRACE)
+    override fun isTraceEnabled(): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.TRACE)
 
     override fun trace(msg: String) = log(msg, LogType.TRACE)
 
@@ -21,7 +21,7 @@ class PrettyLogger(val loggerName: String) : Logger {
 
     override fun trace(msg: String, t: Throwable?) = log(Exception(msg, t))
 
-    override fun isTraceEnabled(marker: Marker): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.TRACE)
+    override fun isTraceEnabled(marker: Marker): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.TRACE)
 
     override fun trace(marker: Marker, msg: String) = trace("${marker.name}: $msg")
 
@@ -35,7 +35,7 @@ class PrettyLogger(val loggerName: String) : Logger {
     //endregion
 
     //region Debug
-    override fun isDebugEnabled(): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.DEBUG)
+    override fun isDebugEnabled(): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.DEBUG)
 
     override fun debug(msg: String) = log(msg, LogType.DEBUG)
 
@@ -47,7 +47,7 @@ class PrettyLogger(val loggerName: String) : Logger {
 
     override fun debug(msg: String, t: Throwable) = log(Exception(msg, t))
 
-    override fun isDebugEnabled(marker: Marker): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.DEBUG)
+    override fun isDebugEnabled(marker: Marker): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.DEBUG)
 
     override fun debug(marker: Marker, msg: String) = debug("${marker.name}: $msg")
 
@@ -61,7 +61,7 @@ class PrettyLogger(val loggerName: String) : Logger {
     //endregion
 
     //region Info
-    override fun isInfoEnabled(): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.INFORMATION)
+    override fun isInfoEnabled(): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.INFORMATION)
 
     override fun info(msg: String) = log(msg, LogType.INFORMATION)
 
@@ -73,7 +73,7 @@ class PrettyLogger(val loggerName: String) : Logger {
 
     override fun info(msg: String, t: Throwable) = log(Exception(msg, t))
 
-    override fun isInfoEnabled(marker: Marker): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.INFORMATION)
+    override fun isInfoEnabled(marker: Marker): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.INFORMATION)
 
     override fun info(marker: Marker, msg: String) = info("${marker.name}: $msg")
 
@@ -87,7 +87,7 @@ class PrettyLogger(val loggerName: String) : Logger {
     //endregion
 
     //region Warn
-    override fun isWarnEnabled(): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.WARNING)
+    override fun isWarnEnabled(): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.WARNING)
 
     override fun warn(msg: String) = log(msg, LogType.WARNING)
 
@@ -99,7 +99,7 @@ class PrettyLogger(val loggerName: String) : Logger {
 
     override fun warn(msg: String, t: Throwable) = log(Exception(msg, t))
 
-    override fun isWarnEnabled(marker: Marker): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.WARNING)
+    override fun isWarnEnabled(marker: Marker): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.WARNING)
 
     override fun warn(marker: Marker, msg: String) = warn("${marker.name}: $msg")
 
@@ -113,7 +113,7 @@ class PrettyLogger(val loggerName: String) : Logger {
     //endregion
 
     //region Error
-    override fun isErrorEnabled(): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.ERROR)
+    override fun isErrorEnabled(): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.ERROR)
 
     override fun error(msg: String) = log(msg, LogType.ERROR)
 
@@ -125,7 +125,7 @@ class PrettyLogger(val loggerName: String) : Logger {
 
     override fun error(msg: String, t: Throwable) = log(Exception(msg, t))
 
-    override fun isErrorEnabled(marker: Marker): Boolean = !LoggerSettings.disabledLogTypes.contains(LogType.ERROR)
+    override fun isErrorEnabled(marker: Marker): Boolean = !PrettyLogSettings.disabledLogTypes.contains(LogType.ERROR)
 
     override fun error(marker: Marker, msg: String) = error("${marker.name}: $msg")
 

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "cz.lukynka"
-version = "1.11"
+version = "2.0"
 
 java.sourceCompatibility = JavaVersion.VERSION_21
 
