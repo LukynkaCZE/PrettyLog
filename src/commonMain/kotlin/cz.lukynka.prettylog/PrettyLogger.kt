@@ -7,7 +7,7 @@ import cz.lukynka.prettylog.style.LogStyle
 import kotlin.reflect.KClass
 
 class PrettyLogger(override val prefixes: Collection<LogPrefix>) : Logger() {
-    constructor(kclass: KClass<*>) : this(listOf(StaticLogPrefix(kclass.simpleName ?: kclass.toString(), LogStyle.BLUE)))
+    constructor(kclass: KClass<*>) : this(listOf(StaticLogPrefix(" ${kclass.simpleName ?: kclass.toString()} ", LogStyle.FILLED_LIGHT_GRAY)))
     constructor(vararg prefixes: LogPrefix) : this(prefixes.toList())
 }
 
