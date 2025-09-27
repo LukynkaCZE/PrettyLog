@@ -43,7 +43,6 @@ dependencies {
 }
 ```
 
----
 
 ## Logging
 Logging is very easy, just call the `log(message, type)` method. `type` parameter is optional and defaults to `RUNTIME`. Add `LoggerFileWriter.load()` to your main function if you want logs to be saved.
@@ -62,7 +61,6 @@ You can also log exceptions!
 ```
 ![image](https://github.com/LukynkaCZE/PrettyLog/assets/48604271/a5268ff2-7736-43df-bfb0-2a82bfc6ecc3)
 
----
 
 ## Logger Settings
 You can change settings by simply setting `LoggerSettings.<setting>` to its new value
@@ -77,7 +75,7 @@ PrettyLogSettings.logFileNameFormat = "yyyy-MM-dd-Hms"
 // Logs which will be disabled and not show up
 PrettyLogSettings.disabledLogTypes = setOf(LogType.WARNING)
 ```
----
+
 ## Log Types
 There are 16 log types by default:
 
@@ -98,9 +96,17 @@ log("T-This is vewy cuwute message OwO", customLogType)
 
 <img width="490" height="86" alt="image" src="https://github.com/user-attachments/assets/7c8a1f30-93c8-4211-b906-e1b36fda2032" />
 
-You may also use `DynamicLogPrefix` which has field for text supplier instead of static string
+There is also  `DynamicLogPrefix` which has field for text supplier instead of static string.
 
----
+You may alternatively use simpler version of this for class-specific logger by referencing the class in the constructor:
+
+```kotlin
+val logger = PrettyLogger(this::class)
+```
+
+<img width="791" height="63" alt="image" src="https://github.com/user-attachments/assets/5a347354-92d8-40cc-ad45-252e9219d1b8" />
+
+
 ## Loggers with custom prefixes
 
 You can add multiple prefixes to a custom logger. For example, we can add "Inbound" prefix and a "Proxy" for better understanding what is being logged and from where
