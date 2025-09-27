@@ -3,6 +3,7 @@ package cz.lukynka.prettylog
 import kotlin.test.Test
 
 class StandardTests {
+
     @Test
     fun testDebug() {
         log("Running testDebug() in StandardTests..", LogType.DEBUG)
