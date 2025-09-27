@@ -2,11 +2,12 @@ package cz.lukynka.prettylog
 
 import cz.lukynka.prettylog.style.AnsiColor
 import cz.lukynka.prettylog.style.LogPrefix
+import cz.lukynka.prettylog.style.StaticLogPrefix
 import cz.lukynka.prettylog.style.LogStyle
 import kotlin.reflect.KClass
 
 class PrettyLogger(override val prefixes: Collection<LogPrefix>) : Logger() {
-    constructor(kclass: KClass<*>) : this(listOf(LogPrefix(kclass.simpleName ?: kclass.toString(), LogStyle.BLUE)))
+    constructor(kclass: KClass<*>) : this(listOf(StaticLogPrefix(kclass.simpleName ?: kclass.toString(), LogStyle.BLUE)))
     constructor(vararg prefixes: LogPrefix) : this(prefixes.toList())
 }
 
@@ -20,10 +21,10 @@ abstract class Logger {
         val resolvedPrefixes = buildString {
             prefixes.forEach { prefix ->
                 if (prefix.style.backgroundColor != null) {
-                    append(prefix.style.backgroundColor.code)
+                    append(prefix.style.backgroundColor!!.code)
                 }
                 append(prefix.style.textColor.code)
-                append(prefix.text)
+                append(prefix.getPrefixText())
                 append(AnsiColor.RESET.code)
                 append(" ")
             }

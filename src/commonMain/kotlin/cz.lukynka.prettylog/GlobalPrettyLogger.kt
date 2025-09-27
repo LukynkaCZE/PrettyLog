@@ -1,9 +1,9 @@
 package cz.lukynka.prettylog
 
-import cz.lukynka.prettylog.style.LogPrefix
+import cz.lukynka.prettylog.style.StaticLogPrefix
 
 object GlobalPrettyLogger : Logger() {
-    override val prefixes: Collection<LogPrefix> = listOf()
+    override val prefixes: Collection<StaticLogPrefix> = listOf()
 }
 
 fun log(message: String, type: LogType = LogType.RUNTIME) {

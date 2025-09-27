@@ -2,11 +2,12 @@ package cz.lukynka.prettylog
 
 import cz.lukynka.prettylog.style.AnsiColor
 import cz.lukynka.prettylog.style.LogPrefix
+import cz.lukynka.prettylog.style.StaticLogPrefix
 import cz.lukynka.prettylog.style.LogStyle
 
-data class LogType(val textStyle: LogStyle, val prefixes: Collection<LogPrefix> = listOf()) {
+data class LogType(val textStyle: LogStyle, val prefixes: Collection<StaticLogPrefix> = listOf()) {
 
-    constructor(textStyle: LogStyle, vararg prefixes: LogPrefix) : this(textStyle, prefixes.toList())
+    constructor(textStyle: LogStyle, vararg prefixes: StaticLogPrefix) : this(textStyle, prefixes.toList())
 
     val resolved: String = buildString {
         prefixes.forEach { prefix ->
@@ -14,7 +15,7 @@ data class LogType(val textStyle: LogStyle, val prefixes: Collection<LogPrefix> 
                 append(prefix.style.backgroundColor.code)
             }
             append(prefix.style.textColor.code)
-            append(prefix.text)
+            append(prefix.getPrefixText())
             append(AnsiColor.RESET.code)
             append(" ")
         }
